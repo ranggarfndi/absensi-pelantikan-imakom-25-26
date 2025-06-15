@@ -62,19 +62,29 @@ body {
     overflow: hidden;
     width: 100%;
     max-width: 450px;       /* Ukuran dibuat sedikit lebih besar */
-    aspect-ratio: 3 / 4;    /* Rasio diubah menjadi 3:4 (potret) */
+    aspect-ratio: 9 / 16;    /* Rasio diubah menjadi 3:4 (potret) */
     background: #000;
     position: relative;
     margin: 0 auto 20px auto;
     border: 1px solid var(--border-color);
 }
 
-#video, #captured-image {
+/* Aturan untuk live video, TETAP gunakan efek cermin */
+#video {
     width: 100%; 
     height: 100%; 
     object-fit: cover;
-    transform: scaleX(-1); /* Menambahkan efek cermin (mirror) */
+    transform: scaleX(-1); 
 }
+
+/* Aturan untuk gambar hasil akhir, JANGAN gunakan efek cermin */
+#captured-image {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    /* Properti 'transform' dihapus dari sini */
+}
+
 #captured-image { display: none; position: absolute; top:0; left:0; }
 
 .input-group {
