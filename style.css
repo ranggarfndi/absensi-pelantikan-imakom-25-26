@@ -61,8 +61,8 @@ body {
     border-radius: 12px;
     overflow: hidden;
     width: 100%;
-    max-width: 400px;
-    aspect-ratio: 4 / 3;
+    max-width: 450px;       /* Ukuran dibuat sedikit lebih besar */
+    aspect-ratio: 3 / 4;    /* Rasio diubah menjadi 3:4 (potret) */
     background: #000;
     position: relative;
     margin: 0 auto 20px auto;
@@ -70,7 +70,10 @@ body {
 }
 
 #video, #captured-image {
-    width: 100%; height: 100%; object-fit: cover;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    transform: scaleX(-1); /* Menambahkan efek cermin (mirror) */
 }
 #captured-image { display: none; position: absolute; top:0; left:0; }
 

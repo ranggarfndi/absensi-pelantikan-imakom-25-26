@@ -31,14 +31,53 @@ async function startCamera() {
         statusDiv.className = 'status error';
     }
 }
+
 snapButton.addEventListener('click', function() {
     const context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // Menghitung rasio yang kita inginkan (3:4)
+    const targetAspectRatio = 3.0 / 4.0;
+
+    // Mengambil dimensi asli dari sumber video
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
+    const videoAspectRatio = videoWidth / videoHeight;
+
+    let drawX = 0;
+    let drawY = 0;
+    let sourceWidth = videoWidth;
+    let sourceHeight = videoHeight;
+
+    // Logika untuk "memotong" (crop) sumber video secara virtual
+    if (videoAspectRatio > targetAspectRatio) {
+        // Jika video lebih lebar dari target (misal 16:9), potong sisi kiri-kanan
+        sourceWidth = videoHeight * targetAspectRatio;
+        drawX = (videoWidth - sourceWidth) / 2;
+    } else {
+        // Jika video lebih tinggi dari target, potong sisi atas-bawah
+        sourceHeight = videoWidth / targetAspectRatio;
+        drawY = (videoHeight - sourceHeight) / 2;
+    }
+
+    // Menggambar hasil crop ke kanvas
+    context.drawImage(
+        video,          // Sumber gambar
+        drawX,          // Titik mulai X di sumber
+        drawY,          // Titik mulai Y di sumber
+        sourceWidth,    // Lebar area yang diambil dari sumber
+        sourceHeight,   // Tinggi area yang diambil dari sumber
+        0,              // Titik X untuk menggambar di kanvas
+        0,              // Titik Y untuk menggambar di kanvas
+        canvas.width,   // Lebar gambar di kanvas
+        canvas.height   // Tinggi gambar di kanvas
+    );
+
+    // Kode selanjutnya tetap sama
     imageDataURL = canvas.toDataURL('image/jpeg');
     capturedImage.src = imageDataURL;
     capturedImage.style.display = 'block';
     video.style.display = 'none';
-    snapButton.textContent = '✔ Foto Diambil'; // Beri feedback
+    snapButton.innerHTML = '✔ Foto Diambil'; // Beri feedback
 });
 
 // Fungsi untuk mengirim form
