@@ -1,0 +1,227 @@
+:root {
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-text: #ffffff;
+    --secondary-text: #b3b3b3;
+    --accent-purple: #FC80FF; /* Menggunakan warna ungu pilihan Anda */
+    --border-color: #333333;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--primary-text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 3rem 1rem;
+    box-sizing: border-box;
+}
+
+.kiosk-container {
+    width: 100%;
+    max-width: 550px;
+    background: var(--surface-color);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    text-align: center;
+}
+
+.kiosk-header {
+    padding: 30px 40px;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(45deg, rgba(252, 128, 255, 0.05), rgba(252, 128, 255, 0));
+}
+
+.kiosk-header h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.kiosk-header p {
+    margin: 0;
+    color: var(--secondary-text);
+}
+
+.form-area {
+    padding: 30px 40px 10px 40px; /* Kurangi padding bawah untuk mendekatkan ke kamera */
+}
+
+.camera-area {
+    padding: 20px 40px 30px 40px;
+}
+
+.camera-box {
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 4 / 3;
+    background: #000;
+    position: relative;
+    margin: 0 auto 20px auto;
+    border: 1px solid var(--border-color);
+}
+
+#video, #captured-image {
+    width: 100%; height: 100%; object-fit: cover;
+}
+#captured-image { display: none; position: absolute; top:0; left:0; }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 12px;
+    position: relative; /* Diperlukan untuk panah dropdown */
+}
+
+.input-group i {
+    color: var(--accent-purple);
+    font-size: 20px;
+}
+
+/* Aturan Gabungan untuk Input & Select */
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group select {
+    width: 100%;
+    max-width: 350px;
+    padding: 14px 40px 14px 20px; /* Padding kanan ditambah untuk panah */
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--primary-text);
+    font-family: var(--font-family);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+/* Aturan Khusus untuk Input Text & Email */
+.input-group input[type="text"],
+.input-group input[type="email"] {
+    text-align: center;
+    padding-left: 20px; /* Padding normal karena tidak ada panah */
+}
+
+/* Aturan Khusus untuk Dropdown (Select) */
+.input-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    text-align: left; /* Teks di dropdown lebih baik rata kiri */
+    padding-left: 20px; /* Padding kiri normal */
+    padding-right: 40px; /* Beri ruang untuk panah kustom */
+}
+
+/* Styling Placeholder untuk Input & Select */
+.input-group input::placeholder,
+.input-group select:invalid {
+    color: var(--secondary-text);
+    opacity: 0.6;
+}
+.input-group input::placeholder {
+    text-align: center;
+}
+
+/* Efek Focus */
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 10px rgba(252, 128, 255, 0.3); /* Menggunakan warna ungu yang sesuai */
+}
+
+.button {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--accent-purple);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#snap {
+    background: transparent;
+    color: var(--accent-purple);
+    max-width: 400px;
+    margin: 0 auto;
+}
+#snap:hover {
+    background: var(--accent-purple);
+    color: var(--primary-text);
+}
+
+.button-primary {
+    background: var(--accent-purple);
+    color: var(--primary-text);
+    border-color: var(--accent-purple);
+    margin-top: 10px;
+}
+.button-primary:hover {
+    background: transparent;
+    color: var(--accent-purple);
+}
+
+.loader {
+    border: 4px solid var(--border-color);
+    border-radius: 50%;
+    border-top: 4px solid var(--accent-purple);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#status {
+    margin-top: 15px;
+    font-weight: 500;
+}
+.status.success { color: var(--success-color); }
+.status.error { color: var(--error-color); }
+
+/* ======================================================= */
+/* === BLOK KODE BARU UNTUK MEMPERBAIKI POSISI PANAH === */
+/* ======================================================= */
+
+/* 1. Buat "pembungkus" menjadi jangkar posisi */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 350px; /* Samakan dengan lebar select/input */
+}
+
+/* 2. Atur posisi panah di dalam "pembungkus" tersebut */
+.select-wrapper::after {
+    content: '\f078'; /* Kode ikon panah chevron bawah dari Font Awesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--secondary-text);
+
+    /* Posisi panah di sebelah kanan, di dalam kotak */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    pointer-events: none; /* Agar panah tidak mengganggu klik */
+}

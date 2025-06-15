@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Kehadiran - Pelantikan IMAKOM</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="kiosk-container">
+        <div class="kiosk-header">
+            <h2>Registrasi Kehadiran</h2>
+            <p>Pelantikan Pengurus IMAKOM Periode 2025/2026</p>
+        </div>
+
+        <div class="form-area">
+            <form id="attendance-form">
+                <p style="color: var(--secondary-text); margin-top: -15px; margin-bottom: 30px;">Dengan hormat, silakan
+                    konfirmasi kehadiran Anda.</p>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="name" placeholder="Nama Lengkap Anda" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Alamat Email" required>
+                </div>
+
+                <div class="input-group dropdown-group">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <select id="status-select" required>
+                        <option value="" disabled selected>Pilih Status Anda...</option>
+                        <option value="Mahasiswa">Mahasiswa</option>
+                        <option value="Dosen">Dosen</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <input type="text" id="himpunan" placeholder="Nama Himpunan (Opsional)">
+                </div>
+
+                <div class="camera-area">
+                    <div class="camera-box">
+                        <video id="video" autoplay></video>
+                        <canvas id="canvas" style="display:none;"></canvas>
+                        <img id="captured-image" class="captured-image" />
+                    </div>
+                    <button id="snap" type="button" class="button">
+                        <i class="fa-solid fa-camera-retro"></i> Ambil Foto Diri
+                    </button>
+                </div>
+
+                <button type="submit" id="submit-btn" class="button button-primary">
+                    <i class="fa-solid fa-paper-plane"></i> Konfirmasi Kehadiran
+                </button>
+
+                <div id="loader" class="loader" style="display: none;"></div>
+                <div id="status" class="status"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
