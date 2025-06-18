@@ -1,5 +1,5 @@
 const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzEuWU2esRzKgT8K_KpzXUd0vt2wx5KoqiqVB3ChupWtHulJuxh7zu8V93zM5d314YB/exec";
+    "https://script.google.com/macros/s/AKfycbx1k5-gJBfAkO5xvl-bX8onzOrL-aKB3UzMPzyEPRvJ3Qb64eXxtHPmATL8fLccBDVD/exec";
 
 // Ambil semua elemen dari HTML
 const video = document.getElementById("video");
